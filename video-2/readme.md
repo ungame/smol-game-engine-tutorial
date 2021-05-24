@@ -1,6 +1,8 @@
 
 # Game Engine do zero 
 
+https://github.com/marciovmf/smol
+
 ## Video 2 - Entrypoints, dllexport e dllimport
 
 https://www.youtube.com/watch?v=CQEakNJl7NU&ab_channel=gamedevlog
