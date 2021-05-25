@@ -94,24 +94,20 @@ Copyright (C) Microsoft Corporation.  All rights reserved.
 
 ## Compilação C++
 
-Um Compilador traduz o codigo para instruções de máquinas.
+Um Compilador traduz o código fonte C++ para instruções de máquinas.
 
-Antes que o código fonte chegue a compilador no processo de build,
-existe uma etapa anterior que passa pelo Pré Processador.
+Antes que o código fonte chegue ao compilador no processo de build,
+existe uma etapa intermediária executada pelo Pré Processador.
 
-Instruções com `#`, exemplo: 
+Instruções com o símbolo `#`, exemplo: 
 
 `#include <stdio.h>`
 
-São instruções que o Pré Processador terá que lidar antes de enviar para o Compilador.
+São instruções que o Pré Processador terá que lidar antes de enviar o resultado para o Compilador.
 
 O Compilador trabalha com a saída do Pré Processador.
 
-Exemplos:
-
-```c++
-#include <stdio.h>
-```
+Exemplo:
 
 ```c++
 #include <stdio.h>
