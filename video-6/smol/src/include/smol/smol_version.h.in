@@ -1,0 +1,13 @@
+#ifndef SMOL_VERSION_IN
+#define SMOL_VERSION_IN
+
+namespace smol
+{
+  const char SMOL_VERSION[] = "${SMOL_VERSION}";
+  const int SMOL_VERSION_MAJOR = ${SMOL_VERSION_MAJOR};
+  const int SMOL_VERSION_MINOR = ${SMOL_VERSION_MINOR};
+  const int SMOL_VERSION_PATCH = ${SMOL_VERSION_PATCH};
+  const int SMOL_VERSION_TWEAK = ${SMOL_VERSION_TWEAK};
+}
+
+#endif
