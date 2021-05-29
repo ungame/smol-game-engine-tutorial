@@ -3,6 +3,8 @@
 *.app
 build
 
+.vscode
+
 # CMake
 MakeFile
 cmake_install.cmake
