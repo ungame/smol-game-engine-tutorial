@@ -3,7 +3,6 @@
 #include <smol/smol_gl.h>
 #include <smol/smol_version.h>
 #include <smol/smol_platform.h>
-#include "smol_resource_win64.h"
 #include <smol/smol_log.h>
 #include <cstdio>
 
@@ -11,6 +10,7 @@ namespace smol
 {
 
     constexpr UINT SMOL_CLOSE_WINDOW = WM_USER + 1;
+    constexpr INT SMOL_DEFAULT_ICON_ID = 101;
 
     struct Window 
     {
@@ -205,7 +205,7 @@ namespace smol
             wc.style = CS_OWNDC;
             wc.lpfnWndProc = smolWindowProc;
             wc.hInstance = hInstance;
-            wc.hIcon = LoadIconA(wc.hInstance, MAKEINTRESOURCE(SMOL_ICON_ID));
+            wc.hIcon = LoadIconA(wc.hInstance, MAKEINTRESOURCE(SMOL_DEFAULT_ICON_ID));
             wc.hbrBackground = (HBRUSH) GetStockObject(BLACK_BRUSH);
             wc.lpszClassName = smolWindowClass;
 

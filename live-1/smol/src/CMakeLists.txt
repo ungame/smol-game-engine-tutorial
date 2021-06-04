@@ -56,8 +56,9 @@ configure_file(${SOURCE_PATH}/include/smol/smol_version.h.in ${SOURCE_PATH}/incl
 #
 # Add windows resource files only if we are building for windows
 #
-if("${PLATFORM}" STREQUAL win64)
-  set(SMOL_WINDOWS_RESOURCE_FILE "${SOURCE_PATH}/win64/smol_resource_win64.rc")
+string(TOLOWER ${CMAKE_SYSTEM_NAME} PLATFORM)
+if(PLATFORM STREQUAL "windows")
+  set(PLATFORM "win64")
 endif()
 
 #
@@ -114,19 +115,4 @@ target_link_libraries(game PRIVATE smol)
 #
 # slauncher.exe: Editor / Game launcher
 #
-add_executable(slauncher ${SOURCE_PATH}/smol_launcher.cpp "${SMOL_WINDOWS_RESOURCE_FILE}")
-target_include_directories(slauncher INTERFACE "${SOURCE_PATH}/include")
-target_include_directories(slauncher INTERFACE "${SOURCE_PATH}/include/smol")
-target_link_libraries(slauncher PRIVATE smol ${OPENGL_LIBRARY})
-
-# Make windows Debug builds to have a console subsystem
-if(CMAKE_CONFIGURATION_TYPES)
-  set_property(TARGET slauncher PROPERTY LINK_OPTIONS
-    $<$<CXX_COMPILER_ID:MSVC>:$<IF:$<CONFIG:Release>,/SUBSYSTEM:WINDOWS,/SUBSYSTEM:CONSOLE>>)
-elseif (CMAKE_BUILD_TYPE STREQUAL "Release" )
-  if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    set_property(TARGET slauncher PROPERTY LINK_OPTIONS /SUBSYSTEM:WINDOWS)
-  endif()
-endif()
-
-install(DIRECTORY "${CMAKE_BINARY_DIR}/smolSDK" DESTINATION .)
+add_subdirectory("Launcher")
