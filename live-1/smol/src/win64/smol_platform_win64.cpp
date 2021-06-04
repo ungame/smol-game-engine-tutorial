@@ -1,12 +1,9 @@
-#ifndef _CRT_SECURE_NO_WARNINGS
-    #define _CRT_SECURE_NO_WARNINGS
-#endif
-
 #include <smol/smol.h>
+#define SMOL_GL_DEFINE_EXTERN
+#include <smol/smol_gl.h>
 #include <smol/smol_version.h>
 #include <smol/smol_platform.h>
 #include "smol_resource_win64.h"
-#include <smol/smol_gl.h>
 #include <smol/smol_log.h>
 #include <cstdio>
 

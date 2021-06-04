@@ -1,9 +1,9 @@
 #ifndef SMOL_GL
 #define SMOL_GL
 
+#include <smol/smol.h>
 #include <smol/gl/glcorearb.h>
 #include <smol/gl/wglext.h>
-#include <smol/smol.h>
 
 
 #ifdef SMOL_PLATFORM_WINDOWS
@@ -16,7 +16,7 @@
     #define SMOL_GL_API
 #endif
 
-#ifdef SMOL_GL_IMPLEMENTATION
+#ifdef SMOL_GL_DEFINE_EXTERN
 	#undef SMOL_GL_API
     #define SMOL_GL_API extern
 #endif

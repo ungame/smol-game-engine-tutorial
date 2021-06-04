@@ -87,6 +87,8 @@ add_library(smol SHARED
   ${SOURCE_PATH}/smol_assetmanager.cpp
   ${SOURCE_PATH}/include/smol/smol_log.h
   ${SOURCE_PATH}/smol_log.cpp
+  ${SOURCE_PATH}/include/smol/smol_renderer.h
+  ${SOURCE_PATH}/smol_renderer_gl.cpp
   "${SMOL_WINDOWS_RESOURCE_FILE}")
 
 set_target_properties(smol PROPERTIES VERSION ${SMOL_VERSION})

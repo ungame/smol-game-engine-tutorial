@@ -1,5 +1,4 @@
-#define SMOL_GL_IMPLEMENTATION
-#include <smol/smol.h>
+#define SMOL_GL_DEFINE_EXTERN
 #include <smol/smol_gl.h>
 
 #if defined(SMOL_ENGINE_IMPLEMENTATION) && defined(SMOL_PLATFORM_WINDOWS)
@@ -13,11 +12,10 @@ namespace smol
         return addr;
     }
 
-#define SMOL_GETGLPROC(param) win32GetGLFunctionPtr(#param)
+    #define SMOL_GETGLPROC(param) win32GetGLFunctionPtr(#param)
 
     void getOpenGLFunctionPointers()
     {
-
         glFrontFace = (PFNGLFRONTFACEPROC) SMOL_GETGLPROC(glFrontFace); 
         glHint = (PFNGLHINTPROC) SMOL_GETGLPROC(glHint); 
         glLineWidth = (PFNGLLINEWIDTHPROC) SMOL_GETGLPROC(glLineWidth); 
