@@ -3,38 +3,16 @@
 #include <smol/smol_log.h>
 #include <smol/smol_mat4.h>
 #include <smol/smol_assetmanager.h>
+#include <smol/smol_platform.h>
 
 namespace smol
 {
-    const char* vertexSource = 
-        "#version 330 core\n"
-        "layout (location = 0) in vec3 vertPos;\n"
-        "layout (location = 1) in vec3 vertColorIn;\n"
-        "layout (location = 2) in vec2 vertUVIn;\n"
-        "uniform mat4 proj;\n"
-        "out vec4 vertColor;\n"
-        "out vec2 uv;\n"
-        "void main() {\n"
-        " gl_Position = proj * vec4(vertPos, 1.0);\n"
-        " vertColor = vec4(vertColorIn, 1.0);\n"
-        " uv = vertUVIn;\n"
-        "}";
-
-
-    const char* fragmentSource = 
-        "#version 330 core\n"
-        "out vec4 fragColor;\n"
-        "uniform sampler2D mainTex;\n"
-        "in vec4 vertColor;\n"
-        "in vec2 uv;\n"
-        "void main() {\n"
-        " fragColor = texture(mainTex, uv);\n"
-        "\n}";
 
     typedef GLuint Shader;
 
     Shader loadShader(const char* vertexSource, const char* fragSource) 
     {
+
         GLint status;
         const int errorLogSize = 1024;
         GLsizei errorBufferLen = 0;
@@ -128,7 +106,14 @@ namespace smol
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
         // load shader
+
+        char* vertexSource = Platform::loadFileToBufferNullTerminated("..\\..\\..\\assets\\default.vs");
+        char* fragmentSource = Platform::loadFileToBufferNullTerminated("..\\..\\..\\assets\\default.fs");
+
         Shader shader = loadShader(vertexSource, fragmentSource);
+
+        Platform::unloadFileBuffer(vertexSource);
+        Platform::unloadFileBuffer(fragmentSource);
         glUseProgram(shader);
 
         glDisable(GL_CULL_FACE);

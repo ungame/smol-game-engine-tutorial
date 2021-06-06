@@ -423,7 +423,24 @@ namespace smol
             buffer = nullptr;
         }
 
+        if ( loadedFileSize )
+        {
+            *loadedFileSize = fileSize;
+        }
+
         fclose(fd);
+
+        return buffer;
+    }
+
+    char* Platform::loadFileToBufferNullTerminated(const char* fileName, size_t* fileSize)
+    {
+        size_t bufferSize;
+        char* buffer = loadFileToBuffer(fileName, &bufferSize, 1, 0);
+        
+        if(fileSize) fileSize = &bufferSize;
+        
+        if( buffer ) buffer[bufferSize] = 0;
 
         return buffer;
     }

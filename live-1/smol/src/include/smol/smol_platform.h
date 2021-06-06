@@ -57,7 +57,9 @@ namespace smol
 
         static const unsigned char* getKeyboardState();
 
-        static char* loadFileToBuffer(const char* fileName, size_t* loadedFileSize, size_t extraBytes, size_t offset);
+        static char* loadFileToBuffer(const char* fileName, size_t* loadedFileSize = nullptr, size_t extraBytes = 0, size_t offset = 0);
+
+        static char* loadFileToBufferNullTerminated(const char* fileName, size_t* fileSize = nullptr);
 
         static void unloadFileBuffer(const char* fileBuffer);
 
