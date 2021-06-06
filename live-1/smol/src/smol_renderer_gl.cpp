@@ -143,7 +143,7 @@ namespace smol
         // Ref: http://docs.gl/gl3/glBlendFunc#Examples
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        Image* image = AssetManager::loadImageBitmap("C:\\Bitmaps\\bitmap.bmp");
+        Image* image = AssetManager::loadImageBitmap("assets\\smol24.bmp");
 
         GLenum textureFormat = GL_RGBA;
         GLenum textureType = GL_UNSIGNED_SHORT;

@@ -90,9 +90,23 @@ namespace smol
 
     Image* AssetManager::loadImageBitmap(const char* fileName)
     {
+        const char* enginePath = Platform::getBinaryPath();
+        size_t enginePathLen = strlen(enginePath);
+
+        size_t fileNameLen = strlen(fileName);
+        char* fullFileName = new char[enginePathLen + fileNameLen + 1];
+        size_t totalStringLen = fileNameLen + enginePathLen;
+        strncpy(fullFileName, enginePath, enginePathLen);
+        strncpy(fullFileName + enginePathLen, fileName, fileNameLen);
+        fullFileName[totalStringLen] = 0;
+
+        debugLogInfo("Loading image %s", fullFileName);
+
         const size_t imageHeaderSize = sizeof(Image);
 
-        char* buffer = Platform::loadFileToBuffer(fileName, nullptr, imageHeaderSize, imageHeaderSize);
+        char* buffer = Platform::loadFileToBuffer(fullFileName, nullptr, imageHeaderSize, imageHeaderSize);
+        
+        delete fullFileName;
 
         if (buffer == nullptr)
         {

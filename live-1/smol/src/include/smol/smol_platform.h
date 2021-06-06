@@ -60,6 +60,8 @@ namespace smol
         static char* loadFileToBuffer(const char* fileName, size_t* loadedFileSize, size_t extraBytes, size_t offset);
 
         static void unloadFileBuffer(const char* fileBuffer);
+
+        static const char* getBinaryPath();
     };
 }
 

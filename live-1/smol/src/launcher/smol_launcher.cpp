@@ -37,6 +37,10 @@ namespace smol
                 return 1;
             }
 
+            const char* path = Platform::getBinaryPath();
+
+            smol::Log::info("Engine Path = %s", path);
+
             smol::Module* game = Platform::loadModule("game.dll");
             SMOL_GAME_CALLBACK_ONSTART onGameStartCallback = (SMOL_GAME_CALLBACK_ONSTART) Platform::getFunctionFromModule(game, SMOL_CALLBACK_NAME_ONSTART);
 

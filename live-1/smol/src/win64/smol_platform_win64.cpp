@@ -12,6 +12,15 @@ namespace smol
     constexpr UINT SMOL_CLOSE_WINDOW = WM_USER + 1;
     constexpr INT SMOL_DEFAULT_ICON_ID = 101;
 
+    struct PlatformInternal
+    {
+        bool initialized;
+        // Ref: https://docs.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=cmd
+        char binaryPath[MAX_PATH];
+    };
+
+    static PlatformInternal internal = {0};
+
     struct Window 
     {
         HWND handle;
@@ -396,7 +405,7 @@ namespace smol
 
         if (! fd)
         {
-            smol::Log::error("Nao conseguiu abrir o aruqivo '%s'", fileName);
+            smol::Log::error("Nao conseguiu abrir o arquivo '%s'", fileName);
             return nullptr;
         }
 
@@ -422,5 +431,26 @@ namespace smol
     void Platform::unloadFileBuffer(const char* fileBuffer)
     {
         delete[] fileBuffer;
+    }
+
+    const char* Platform::getBinaryPath()
+    {
+        if ( internal.initialized )
+        {
+            return internal.binaryPath;
+        }
+
+        // Ref: https://docs.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-getmodulefilenamea
+        int len = GetModuleFileNameA(NULL, internal.binaryPath, MAX_PATH);
+
+        char* p = internal.binaryPath + len;
+        while( *p != '\\' && p > internal.binaryPath )
+            --p;
+        
+        ++p;
+        *p = 0;
+        internal.initialized = true;
+
+        return internal.binaryPath;
     }
 }
