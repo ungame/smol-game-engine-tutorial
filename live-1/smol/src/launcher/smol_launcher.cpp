@@ -56,44 +56,6 @@ namespace smol
             const int HEIGHT = 576;
             smol::Window* window = Platform::createWindow(WIDTH, HEIGHT, "Smol Engine");
 
-
-            // Texturing
-
-            // Create a procedural checker texture
-#if 0
-            const int texWidth = 1024;
-            const int texHeight = texWidth;
-            const int squareCount = 64;
-            const int squareSize = texWidth / squareCount;
-            unsigned char* texData = new unsigned char[texWidth * texHeight * 3]; 
-            unsigned char* pixel = texData;
-
-            for(int i = 0; i < texWidth; i++) 
-            {
-                for(int j = 0; j < texHeight; j++)
-                {
-                    int x = i / squareSize;
-                    int y = j / squareSize;
-                    int squareNumber = x * squareCount + y;
-
-                    unsigned char color;
-                    bool isOdd = (squareNumber & 1);
-                    if(x & 1)
-                    {
-                        color = (isOdd) ? 0xAA : 0x55; 
-                    }
-                    else
-                    {
-                        color = (isOdd) ? 0x55 : 0xAA;
-                    }
-
-                    *pixel++ = color;
-                    *pixel++ = color;
-                    *pixel++ = color;
-                }
-            }
-#endif
-  
             bool isOrtho = false;
             float scale = 1.0f;
             float rotation = 0.0f;

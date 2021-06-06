@@ -393,6 +393,13 @@ namespace smol
     char* Platform::loadFileToBuffer(const char* fileName, size_t* loadedFileSize, size_t extraBytes, size_t offset)
     {
         FILE* fd = fopen(fileName, "rb");
+
+        if (! fd)
+        {
+            smol::Log::error("Nao conseguiu abrir o aruqivo '%s'", fileName);
+            return nullptr;
+        }
+
         fseek(fd, 0, SEEK_END);
         size_t fileSize = ftell(fd);
         fseek(fd, 0, SEEK_SET);

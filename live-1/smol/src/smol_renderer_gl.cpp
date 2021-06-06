@@ -104,8 +104,8 @@ namespace smol
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
         float vertices[] = {
-                0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
-                0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
+             0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top right
+             0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom right
             -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom left
             -0.5f,  0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f  // top left 
         };
@@ -143,7 +143,7 @@ namespace smol
         // Ref: http://docs.gl/gl3/glBlendFunc#Examples
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        Image* image = AssetManager::loadImageBitmap("C:\\Bitmaps\\smol24.bmp");
+        Image* image = AssetManager::loadImageBitmap("C:\\Bitmaps\\bitmap.bmp");
 
         GLenum textureFormat = GL_RGBA;
         GLenum textureType = GL_UNSIGNED_SHORT;

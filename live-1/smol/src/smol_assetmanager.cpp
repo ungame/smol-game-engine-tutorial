@@ -39,11 +39,65 @@ namespace smol
 
 #pragma pack(pop)
 
+    Image* createProceduralImage()
+    {
+        // Create a procedural checker texture
+        const int texWidth = 800;
+        const int texHeight = texWidth;
+        const int squareCount = 32;
+        const int squareSize = texWidth / squareCount;
+        const int sizeInBytes = texWidth * texHeight * 3;
+
+        char* buffer = new char[sizeInBytes + sizeof(Image)];
+
+        unsigned char* texData = (unsigned char*) buffer + sizeof(Image);
+        unsigned char* pixel = texData;
+
+        for(int i = 0; i < texWidth; i++) 
+        {
+            for(int j = 0; j < texHeight; j++)
+            {
+                int x = i / squareSize;
+                int y = j / squareSize;
+                int squareNumber = x * squareCount + y;
+
+                unsigned char color;
+                bool isOdd = (squareNumber & 1);
+                if(x & 1)
+                {
+                    color = (isOdd) ? 0xAA : 0x55; 
+                }
+                else
+                {
+                    color = (isOdd) ? 0x55 : 0xAA;
+                }
+
+                *pixel++ = color;
+                *pixel++ = color;
+                *pixel++ = color;
+            }
+        }
+
+
+        Image* image = (Image*) buffer;
+        image->width = texWidth;
+        image->height = texHeight;
+        image->bitsPerPixel = 24;
+        image->data = (char*) texData;
+
+        return image;
+    }
+
     Image* AssetManager::loadImageBitmap(const char* fileName)
     {
         const size_t imageHeaderSize = sizeof(Image);
 
         char* buffer = Platform::loadFileToBuffer(fileName, nullptr, imageHeaderSize, imageHeaderSize);
+
+        if (buffer == nullptr)
+        {
+            return createProceduralImage();
+        }
         
         BitmapHeader* bitmap = (BitmapHeader*) (buffer + imageHeaderSize);
         Image* image = (Image*) buffer;
